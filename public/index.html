@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Task Manager</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem auto;
+      max-width: 600px;
+      background-color: #f5f5f5;
+      padding: 2rem;
+      border-radius: 10px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    input, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin: 0.5rem 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      border: none;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .task {
+      background-color: white;
+      border: 1px solid #ccc;
+      padding: 1rem;
+      margin-top: 1rem;
+      border-radius: 5px;
+    }
+
+    .task-actions {
+      margin-top: 0.5rem;
+      display: flex;
+      gap: 10px;
+    }
+
+    .task-actions button {
+      flex: 1;
+      padding: 8px;
+    }
+
+    .task input {
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>📝 Task Manager</h1>
+
+  <input type="text" id="title" placeholder="Task Title" />
+  <textarea id="description" placeholder="Description"></textarea>
+  <button onclick="createTask()">➕ Add Task</button>
+
+  <div id="tasks"></div>
+
+  <script>
+    async function fetchTasks() {
+      const res = await fetch('/api/tasks');
+      const tasks = await res.json();
+      const container = document.getElementById('tasks');
+      container.innerHTML = '';
+
+      tasks.forEach(task => {
+        container.innerHTML += `
+          <div class="task" id="task-${task._id}">
+            <strong>${task.title}</strong><br />
+            <span>${task.description || ''}</span><br />
+            <small>Status: ${task.status}</small>
+            <div class="task-actions">
+              <button onclick="deleteTask('${task._id}')">🗑 Delete</button>
+              <button onclick="editTask('${task._id}', '${task.title}', \`${task.description || ''}\`)">✏️ Edit</button>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    async function createTask() {
+      const title = document.getElementById('title').value.trim();
+      const description = document.getElementById('description').value.trim();
+
+      if (!title) {
+        alert('Title is required');
+        return;
+      }
+
+      await fetch('/api/tasks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title, description })
+      });
+
+      document.getElementById('title').value = '';
+      document.getElementById('description').value = '';
+      fetchTasks();
+    }
+
+    async function deleteTask(id) {
+      await fetch('/api/tasks/' + id, {
+        method: 'DELETE'
+      });
+      fetchTasks();
+    }
+
+    function editTask(id, oldTitle, oldDesc) {
+      const taskDiv = document.getElementById('task-' + id);
+      taskDiv.innerHTML = `
+        <input type="text" id="edit-title-${id}" value="${oldTitle}" />
+        <textarea id="edit-desc-${id}">${oldDesc}</textarea>
+        <div class="task-actions">
+          <button onclick="updateTask('${id}')">✅ Save</button>
+          <button onclick="fetchTasks()">❌ Cancel</button>
+        </div>
+      `;
+    }
+
+    async function updateTask(id) {
+      const newTitle = document.getElementById('edit-title-' + id).value;
+      const newDesc = document.getElementById('edit-desc-' + id).value;
+
+      await fetch('/api/tasks/' + id, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title: newTitle, description: newDesc })
+      });
+
+      fetchTasks();
+    }
+
+    // Initial load
+    fetchTasks();
+  </script>
+</body>
+</html>
