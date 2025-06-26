@@ -31,13 +31,13 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Start your app in background
+      - name: Start App in Background
         run: |
           PORT=8080 MONGO_URL=mongodb://localhost:27017/keploy-test-db npm start &
           sleep 10
 
-      - name: Run Keploy Tests using GitHub Action
-        uses: keploy/keploy-github-action@v1
-        with:
-          command: curl http://localhost:8080/api/tasks
-          delay: 5
+      - name: Download Keploy Binary
+        run: |
+          curl -Lo keploy https://github.com/keploy/keploy/releases/latest/download/keploy_linux_amd64
+          chmod +x keploy
+          ./keploy record --proxyPort 16789 --appPort 8080 --delay 5 --testReportPath keploy-report
