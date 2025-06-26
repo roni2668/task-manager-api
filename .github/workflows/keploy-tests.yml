@@ -30,4 +30,4 @@ jobs:
         run: npm install
 
       - name: Run Keploy Tests
-        run: npx keploy test -c "npm start" --delay 5
+        run: PORT=8080 npx keploy test -c "npm start" --delay 5
