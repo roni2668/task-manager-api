@@ -85,8 +85,6 @@ describe('getTaskById', () => {
 });
 
 // ✅ createTask
-
-
 describe('createTask', () => {
   it('should create and return a task with status 201', async () => {
     const req = { body: { title: 'New Task' } };
@@ -94,23 +92,17 @@ describe('createTask', () => {
 
     const mockTask = { _id: '123', title: 'New Task' };
 
-    // Step 1: Create a mock constructor instance with `save` method
     const mockSave = jest.fn().mockResolvedValue(mockTask);
-
-    // Step 2: Override Task constructor to return object with `save`
     const MockTaskConstructor = function () {
       return { save: mockSave };
     };
 
-    // Step 3: Assign mock implementation to Task
     Task.mockImplementation(MockTaskConstructor);
 
-    // Step 4: Call the actual controller
     await taskController.createTask(req, res);
 
-    // Step 5: Expectations
     expect(Task).toHaveBeenCalledWith(req.body);
-    expect(mockSave).toHaveBeenCalled(); // ensure `.save()` is actually called
+    expect(mockSave).toHaveBeenCalled();
     expect(res.status).toHaveBeenCalledWith(201);
     expect(res.json).toHaveBeenCalledWith(mockTask);
   });
@@ -128,8 +120,6 @@ describe('createTask', () => {
     expect(res.json).toHaveBeenCalledWith({ message: 'Save failed' });
   });
 });
-
-
 
 // ✅ updateTask
 describe('updateTask', () => {

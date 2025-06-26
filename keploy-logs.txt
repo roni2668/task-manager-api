@@ -1,0 +1,61 @@
+🐰 Keploy: 2025-06-26T23:17:17+05:30 	[34mINFO[0m	Starting keploy in docker with image	{"image:": "ghcr.io/keploy/keploy:v2.6.14"}
+🐰 Keploy: 2025-06-26T23:17:18+05:30 	[34mINFO[0m	Starting keploy in docker with default context, as that is the current context.
+🐰 Keploy: 2025-06-26T17:47:18Z 	[34mINFO[0m	detected that Keploy is running in a docker container
+🐰 Keploy: 2025-06-26T17:47:18Z 	[34mINFO[0m	keploy requires docker compose containers to be run with external network
+🐰 Keploy: 2025-06-26T17:47:18Z 	[34mINFO[0m	Found docker compose file path: docker-compose.yml
+🐰 Keploy: 2025-06-26T17:47:18Z 	[34mINFO[0m	Created new docker-compose for keploy internal use	{"path": "docker-compose-tmp.yaml"}
+🐰 Keploy: 2025-06-26T17:47:18Z 	[34mINFO[0m	trying to inject network:keploy-network to the keploy container
+🐰 Keploy: 2025-06-26T17:47:19Z 	[34mINFO[0m	Successfully injected network to the keploy container	{"Keploy container": "keploy-v2", "appNetwork": "keploy-network", "keploy container ip": "172.19.0.2"}
+🐰 Keploy: 2025-06-26T17:47:21Z 	[34mINFO[0m	keploy initialized and probes added to the kernel.
+🐰 Keploy: 2025-06-26T17:47:21Z 	[34mINFO[0m	starting UDP DNS server at addr :26789
+🐰 Keploy: 2025-06-26T17:47:21Z 	[34mINFO[0m	starting TCP DNS server at addr :26789
+🐰 Keploy: 2025-06-26T17:47:21Z 	[34mINFO[0m	Keploy has taken control of the DNS resolution mechanism, your application may misbehave if you have provided wrong domain name in your application code.
+🐰 Keploy: 2025-06-26T17:47:21Z 	[34mINFO[0m	Proxy started at port:16789
+🐰 Keploy: 2025-06-26T17:52:16Z 	[31mERROR[0m	error while running the app	{"error": "timeout waiting for the container to start"}
+🐰 Keploy: 2025-06-26T17:52:16Z 	[34mINFO[0m	proxy stopped...
+🐰 Keploy: 2025-06-26T17:52:19Z 	[34mINFO[0m	eBPF resources released successfully...
+🐰 Keploy: 2025-06-26T17:52:19Z 	[31mERROR[0m	Error removing file	{"error": "remove keploy-logs.txt: permission denied"}
+🐰 Keploy: 2025-06-26T17:52:19Z 	[31mERROR[0m	Failed to delete Keploy Logs	{"error": "remove keploy-logs.txt: permission denied"}
+🐰 Keploy: 2025-06-26T23:22:20+05:30 	[34mINFO[0m	exiting the current process as the command is moved to docker
+🐰 Keploy: 2025-06-26T23:24:32+05:30 	[34mINFO[0m	Starting keploy in docker with image	{"image:": "ghcr.io/keploy/keploy:v2.6.14"}
+🐰 Keploy: 2025-06-26T23:24:32+05:30 	[34mINFO[0m	Starting keploy in docker with default context, as that is the current context.
+🐰 Keploy: 2025-06-26T17:54:32Z 	[34mINFO[0m	detected that Keploy is running in a docker container
+🐰 Keploy: 2025-06-26T17:54:32Z 	[34mINFO[0m	keploy requires docker compose containers to be run with external network
+🐰 Keploy: 2025-06-26T17:54:32Z 	[34mINFO[0m	Found docker compose file path: docker-compose.yml
+🐰 Keploy: 2025-06-26T17:54:33Z 	[34mINFO[0m	Created new docker-compose for keploy internal use	{"path": "docker-compose-tmp.yaml"}
+🐰 Keploy: 2025-06-26T17:54:33Z 	[34mINFO[0m	trying to inject network:keploy-network to the keploy container
+🐰 Keploy: 2025-06-26T17:54:33Z 	[34mINFO[0m	Successfully injected network to the keploy container	{"Keploy container": "keploy-v2", "appNetwork": "keploy-network", "keploy container ip": "172.19.0.2"}
+🐰 Keploy: 2025-06-26T17:54:34Z 	[34mINFO[0m	keploy initialized and probes added to the kernel.
+🐰 Keploy: 2025-06-26T17:54:35Z 	[34mINFO[0m	starting UDP DNS server at addr :26789
+🐰 Keploy: 2025-06-26T17:54:35Z 	[34mINFO[0m	starting TCP DNS server at addr :26789
+🐰 Keploy: 2025-06-26T17:54:35Z 	[34mINFO[0m	Keploy has taken control of the DNS resolution mechanism, your application may misbehave if you have provided wrong domain name in your application code.
+🐰 Keploy: 2025-06-26T17:54:35Z 	[34mINFO[0m	Proxy started at port:16789
+🐰 Keploy: 2025-06-26T17:58:01Z 	[31mERROR[0m	error while running the app	{"error": "timeout waiting for the container to start"}
+🐰 Keploy: 2025-06-26T17:58:01Z 	[34mINFO[0m	proxy stopped...
+🐰 Keploy: 2025-06-26T17:58:04Z 	[34mINFO[0m	eBPF resources released successfully...
+🐰 Keploy: 2025-06-26T17:58:04Z 	[31mERROR[0m	Error removing file	{"error": "remove keploy-logs.txt: permission denied"}
+🐰 Keploy: 2025-06-26T17:58:04Z 	[31mERROR[0m	Failed to delete Keploy Logs	{"error": "remove keploy-logs.txt: permission denied"}
+🐰 Keploy: 2025-06-26T23:28:05+05:30 	[34mINFO[0m	exiting the current process as the command is moved to docker
+🐰 Keploy: 2025-06-26T23:33:15+05:30 	[34mINFO[0m	Starting keploy in docker with image	{"image:": "ghcr.io/keploy/keploy:v2.6.14"}
+🐰 Keploy: 2025-06-26T23:33:15+05:30 	[34mINFO[0m	Starting keploy in docker with default context, as that is the current context.
+🐰 Keploy: 2025-06-26T18:03:15Z 	[34mINFO[0m	detected that Keploy is running in a docker container
+🐰 Keploy: 2025-06-26T18:03:15Z 	[34mINFO[0m	keploy requires docker compose containers to be run with external network
+🐰 Keploy: 2025-06-26T18:03:15Z 	[34mINFO[0m	Found docker compose file path: docker-compose.yml
+🐰 Keploy: 2025-06-26T18:03:15Z 	[34mINFO[0m	Created new docker-compose for keploy internal use	{"path": "docker-compose-tmp.yaml"}
+🐰 Keploy: 2025-06-26T18:03:15Z 	[34mINFO[0m	trying to inject network:keploy-network to the keploy container
+🐰 Keploy: 2025-06-26T18:03:15Z 	[34mINFO[0m	Successfully injected network to the keploy container	{"Keploy container": "keploy-v2", "appNetwork": "keploy-network", "keploy container ip": "172.19.0.2"}
+🐰 Keploy: 2025-06-26T18:03:17Z 	[34mINFO[0m	keploy initialized and probes added to the kernel.
+🐰 Keploy: 2025-06-26T18:03:18Z 	[34mINFO[0m	starting UDP DNS server at addr :26789
+🐰 Keploy: 2025-06-26T18:03:18Z 	[34mINFO[0m	starting TCP DNS server at addr :26789
+🐰 Keploy: 2025-06-26T18:03:18Z 	[34mINFO[0m	Keploy has taken control of the DNS resolution mechanism, your application may misbehave if you have provided wrong domain name in your application code.
+🐰 Keploy: 2025-06-26T18:03:18Z 	[34mINFO[0m	Proxy started at port:16789
+🐰 Keploy: 2025-06-26T18:06:29Z 	[31mERROR[0m	error while running the app	{"error": "timeout waiting for the container to start"}
+🐰 Keploy: 2025-06-26T18:06:29Z 	[34mINFO[0m	proxy stopped...
+🐰 Keploy: 2025-06-26T18:06:32Z 	[34mINFO[0m	eBPF resources released successfully...
+🐰 Keploy: 2025-06-26T18:06:32Z 	[31mERROR[0m	Error removing file	{"error": "remove keploy-logs.txt: permission denied"}
+🐰 Keploy: 2025-06-26T18:06:32Z 	[31mERROR[0m	Failed to delete Keploy Logs	{"error": "remove keploy-logs.txt: permission denied"}
+🐰 Keploy: 2025-06-26T23:36:33+05:30 	[34mINFO[0m	exiting the current process as the command is moved to docker
+🐰 Keploy: 2025-06-26T23:36:55+05:30 	[31mERROR[0m	Error removing file	{"error": "remove keploy-logs.txt: The process cannot access the file because it is being used by another process."}
+🐰 Keploy: 2025-06-26T23:36:55+05:30 	[31mERROR[0m	Failed to delete Keploy Logs	{"error": "remove keploy-logs.txt: The process cannot access the file because it is being used by another process."}
+🐰 Keploy: 2025-06-26T23:37:15+05:30 	[31mERROR[0m	Error removing file	{"error": "remove keploy-logs.txt: The process cannot access the file because it is being used by another process."}
+🐰 Keploy: 2025-06-26T23:37:15+05:30 	[31mERROR[0m	Failed to delete Keploy Logs	{"error": "remove keploy-logs.txt: The process cannot access the file because it is being used by another process."}
