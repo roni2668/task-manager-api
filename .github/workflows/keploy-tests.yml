@@ -1,43 +1,51 @@
-name: Keploy API Tests
+name: keploy-tests
 
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
-  keploy-tests:
+  keploy:
     runs-on: ubuntu-latest
 
     services:
       mongo:
-        image: mongo:5.0
+        image: mongo:6.0
         ports:
           - 27017:27017
         options: >-
-          --health-cmd="mongosh --eval 'db.runCommand({ ping: 1 })'"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=5
+          --health-cmd "mongosh --eval 'db.stats()'" 
+          --health-interval 10s 
+          --health-timeout 5s 
+          --health-retries 5
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: '18'
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: npm install
 
-      - name: Start App in Background
+      - name: Build project (if needed)
+        run: npm run build || echo "No build step"
+
+      - name: Start app in background
         run: |
-          PORT=8080 MONGO_URL=mongodb://localhost:27017/keploy-test-db npm start &
-          sleep 10
+          nohup npm start &
+          sleep 5
 
       - name: Download Keploy Binary
         run: |
-          curl -Lo keploy https://github.com/keploy/keploy/releases/latest/download/keploy_linux_amd64
+          curl -Lo keploy https://github.com/keploy/keploy/releases/download/v0.1.8/keploy_linux_amd64
           chmod +x keploy
-          ./keploy record --proxyPort 16789 --appPort 8080 --delay 5 --testReportPath keploy-report
+
+      - name: Run Keploy Test
+        run: |
+          ./keploy test --proxyPort 16789 --appPort 8080 --testReportPath keploy-report
