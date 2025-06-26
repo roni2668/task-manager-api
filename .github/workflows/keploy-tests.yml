@@ -20,7 +20,7 @@ jobs:
           --health-retries=5
 
     steps:
-      - name: Checkout code
+      - name: Checkout Repository
         uses: actions/checkout@v3
 
       - name: Set up Node.js
@@ -28,15 +28,16 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: npm install
 
-      - name: Wait for Mongo to be ready
+      - name: Start your app in background
         run: |
-          echo "Waiting for MongoDB to be ready..."
+          PORT=8080 MONGO_URL=mongodb://localhost:27017/keploy-test-db npm start &
           sleep 10
 
-      - name: Run Keploy Test
-        run: |
-          PORT=8080 MONGO_URL=mongodb://localhost:27017/keploy-test-db \
-          npx keploy test -c "npm start" --delay 5
+      - name: Run Keploy Tests using GitHub Action
+        uses: keploy/keploy-github-action@v1
+        with:
+          command: curl http://localhost:8080/api/tasks
+          delay: 5
