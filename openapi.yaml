@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Task Manager API
   version: 1.0.0
-  description: API to manage tasks (CRUD)
+  description: API for managing tasks with full CRUD operations
 
 servers:
   - url: http://localhost:5000/api
@@ -11,41 +11,64 @@ paths:
   /tasks:
     get:
       summary: Get all tasks
+      tags:
+        - Tasks
       responses:
         '200':
-          description: OK
+          description: List of all tasks
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+
     post:
       summary: Create a new task
+      tags:
+        - Tasks
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Task'
+              $ref: '#/components/schemas/TaskInput'
       responses:
         '201':
-          description: Created
+          description: Task created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
 
   /tasks/{id}:
     get:
       summary: Get a task by ID
+      tags:
+        - Tasks
       parameters:
-        - in: path
-          name: id
+        - name: id
+          in: path
           required: true
           schema:
             type: string
       responses:
         '200':
-          description: Found
+          description: Task found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
         '404':
-          description: Not Found
+          description: Task not found
 
     put:
-      summary: Update a task
+      summary: Update a task by ID
+      tags:
+        - Tasks
       parameters:
-        - in: path
-          name: id
+        - name: id
+          in: path
           required: true
           schema:
             type: string
@@ -54,29 +77,56 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Task'
+              $ref: '#/components/schemas/TaskInput'
       responses:
         '200':
-          description: Updated
+          description: Task updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '404':
+          description: Task not found
 
     delete:
-      summary: Delete a task
+      summary: Delete a task by ID
+      tags:
+        - Tasks
       parameters:
-        - in: path
-          name: id
+        - name: id
+          in: path
           required: true
           schema:
             type: string
       responses:
         '200':
-          description: Deleted
+          description: Task deleted successfully
+        '404':
+          description: Task not found
 
 components:
   schemas:
     Task:
       type: object
       properties:
+        _id:
+          type: string
+          example: 60c72b2f9b1e8e3a4c8d1a2c
         title:
           type: string
+          example: Finish unit testing
         description:
           type: string
+          example: Write all unit and API test cases for task controller
+
+    TaskInput:
+      type: object
+      required:
+        - title
+      properties:
+        title:
+          type: string
+          example: Complete project setup
+        description:
+          type: string
+          example: Initialize Git, setup folder structure
