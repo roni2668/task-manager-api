@@ -1,6 +1,8 @@
 name: Keploy API Tests
 
-on: [push]
+on:
+  push:
+    branches: [main]
 
 jobs:
   keploy-tests:
@@ -12,9 +14,9 @@ jobs:
         ports:
           - 27017:27017
         options: >-
-          --health-cmd="mongo --eval 'db.runCommand({ ping: 1 })'" 
-          --health-interval=10s 
-          --health-timeout=5s 
+          --health-cmd="mongosh --eval 'db.runCommand({ ping: 1 })'"
+          --health-interval=10s
+          --health-timeout=5s
           --health-retries=5
 
     steps:
@@ -29,5 +31,12 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run Keploy Tests
-        run: PORT=8080 npx keploy test -c "npm start" --delay 5
+      - name: Wait for Mongo to be ready
+        run: |
+          echo "Waiting for MongoDB to be ready..."
+          sleep 10
+
+      - name: Run Keploy Test
+        run: |
+          PORT=8080 MONGO_URL=mongodb://localhost:27017/keploy-test-db \
+          npx keploy test -c "npm start" --delay 5
